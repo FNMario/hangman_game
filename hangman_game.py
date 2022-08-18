@@ -1,7 +1,7 @@
 import os
 import random
 
-pressed_keys = []
+entered_leters = []
 
 def enter_letter():
     key_pressed = input('\nIngresa una letra: ').upper()
@@ -28,23 +28,27 @@ def run():
 
     while word.count('_'):
         os.system('clear')
-        print(choosen_word)
         print('Adivina la palabra!')
         for letter in word:
             print(letter, end=' ')
         
         while True:
             letter = enter_letter()
-            if letter:
-                break
-
+            try: 
+                entered_leters.index(letter)
+                print('Esa letra ya fue ingresada')
+            except ValueError:
+                if letter:
+                    break
+        
         for pos, char in enumerate(choosen_word):
             if (char == letter):
                 word[pos] = char
+        entered_leters.append(letter)
         letter = False
 
     os.system('clear')
-    print('¡CORRECT! The word was: ' + choosen_word)
+    print('¡EXCELENTE! La palabra era: ' + choosen_word.capitalize())
 
 if __name__ == '__main__':
     run()
